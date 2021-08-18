@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form [formGroup]="profileForm" (ngSubmit)="create()">
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="form-label">Profile Picture</label>
+                  <input type="text" class="form-control" formControlName="ProfilePicture" >
+                  <div>
+                    <div *ngIf="ProfilePicture?.touched && ProfilePicture?.errors?.required" class="alert alert-danger">
+                      This filed is required!
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="textarea" class="form-label">About</label>
+                  <textarea class="form-control" id="textarea"  rows="3" formControlName="About"></textarea>
+                  <!-- <div  *ngIf="password?.touched && password?.errors?.required" class="alert alert-danger">
+                    This filed is required!
+                  </div> -->
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Create Profile</button>
+              </form>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+  </div>

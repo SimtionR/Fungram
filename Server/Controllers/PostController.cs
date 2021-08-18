@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
+    [Authorize]
     public class PostController : ApiController
     {
         private readonly IPostService _postService;
@@ -22,7 +23,7 @@ namespace Server.Controllers
             _profileService = profileService;
         }
 
-        [Authorize]
+
         [HttpPost]
         public async Task<IActionResult> CreatePost(PostModel model)
         {
@@ -44,7 +45,7 @@ namespace Server.Controllers
 
         }
 
-        [Authorize]
+
         [HttpGet]
         public async Task<IEnumerable<FeedListModel>> Feed()
         {
@@ -70,7 +71,7 @@ namespace Server.Controllers
             
         }
 
-        [Authorize]
+    
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<PostDetailModel>> DetailedPost(int id)
@@ -86,7 +87,7 @@ namespace Server.Controllers
         }
 
 
-        /*[HttpPut]
+        [HttpPut]
         public async Task<ActionResult> Update(UpdatePost model)
         {
             var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -94,12 +95,43 @@ namespace Server.Controllers
 
             var profile = _profileService.GetProfileByUser(userId);
 
-            if (profile !=null)
+            if (profile != null)
             {
-                //if(model.PostId )
+                var update = await this._postService.Update(model.PostId, model.Description, profile.ProfileId);
+
+                if(!update)
+                {
+                    return BadRequest();
+                }
+                return Ok();
             }
 
-        }*/
+            return BadRequest();
+
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            var profile = _profileService.GetProfileByUser(userId);
+
+            if (profile != null)
+            {
+                var deleted = await this._postService.Delete(id, profile.ProfileId);
+
+                if(!deleted)
+                {
+                    return BadRequest();
+                }
+
+                return Ok();
+            }
+
+            return BadRequest();
+        }
 
 
 

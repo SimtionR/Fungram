@@ -95,9 +95,48 @@ namespace InTouch.Data.Services
                 }).FirstOrDefaultAsync();
         }
 
-        /*public Task <bool> Update( int id, string description, string userId)
+        public async Task<bool> Update(int id, string description, int profileId)
         {
+            var post = await this
+                ._ctx
+                .Posts
+                .Where(p => p.PostId == id && p.ProfileId == profileId)
+                .FirstOrDefaultAsync();
 
-        }*/
+            if(post == null)
+            {
+                return false;
+            }
+
+            else
+            {
+                post.PostDescription = description;
+
+                await this._ctx.SaveChangesAsync();
+
+                return true;
+            }
+
+        }
+
+        public async Task<bool> Delete(int postId, int profileId)
+        {
+            var post = await this._ctx.Posts
+                .Where(p => p.PostId == postId && p.ProfileId == profileId)
+                .FirstOrDefaultAsync();
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            else
+            {
+                this._ctx.Posts.Remove(post);
+                await this._ctx.SaveChangesAsync();
+
+                return true;
+            }
+        }
     }
 }

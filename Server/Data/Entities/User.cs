@@ -12,8 +12,8 @@ namespace Server.Data.Entities
     {
 
      
-        public string FirsName { get; set; }
-        public string LastName { get; set; }
+     /*   public string FirsName { get; set; }
+        public string LastName { get; set; }*/
 
         public int ProfileId { get; set; }
        

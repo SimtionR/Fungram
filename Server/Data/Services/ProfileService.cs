@@ -24,10 +24,12 @@ namespace InTouch.Data.Services
             _ctx.SaveChanges();
         }
 
-        public async Task<int> Create(string profilePicutre, string about, string userId)
+        public async Task<int> Create(string profilePicutre, string about, string userId, string firstName, string lastName)
         {
             var profile = new Profile
             {
+                FirsName=firstName,
+                LastName=lastName,
                 About = about,
                 ProfilePicture = profilePicutre,
                 UserId = userId

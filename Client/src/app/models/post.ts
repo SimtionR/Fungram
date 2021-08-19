@@ -1,8 +1,10 @@
+import { Profile } from "./profile";
+
 export interface Post
 {
-    id:number;
-    ImageUrl:string;
-    Description:string;
-
+    postId:number;
+    imageUrl:string;
+    postDescription?:string;
+    profile?:Profile;
 
 }

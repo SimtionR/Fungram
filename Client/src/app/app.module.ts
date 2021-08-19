@@ -15,6 +15,9 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import {PostService} from './services/post.service'
 import { PostComponent } from './post/post.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { DetailPostComponent } from './detail-post/detail-post.component';
+import { UpdatePostComponent } from './update-post/update-post.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { PostComponent } from './post/post.component';
     LoginComponent,
     RegisterComponent,  
     CreateprofileComponent,
-    PostComponent
+    PostComponent,
+    PostListComponent,
+    DetailPostComponent,
+    UpdatePostComponent
   ],
   imports: [
     BrowserModule,

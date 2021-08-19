@@ -1,0 +1,21 @@
+
+
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-6 offset-md-4" *ngFor="let post of posts">
+            <div class="card" style="width: 18rem;">
+                <img [src]="post.imageUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{post.postId}}</h5>
+                  <p class="card-text">{{post.postDescription}}</p>
+                  <a (click)="postRoute(post.postId)" class="btn btn-primary">See post</a>
+                  <br>
+                  <button class="btn btn-danger" (click)="deletePost(post.postId)">Delete</button>
+                  <button (click)="updatePost(post.postId)" class="btn btn-warning">Update</button>
+                  
+                </div>
+              </div>
+          </div>
+       
+      </div>
+  </div>

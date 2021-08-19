@@ -11,7 +11,7 @@ namespace Server.Data.IServices
         Profile GetProfileById(int profileId);
         Profile GetProfileByUser(string userId);
         void AddProfile(Profile profile);
-        public Task<int> Create(string profilePicutre, string about, string userId);
+        public Task<int> Create(string profilePicutre, string about, string userId, string firstName, string lastName);
         
         bool SaveChanges();
    

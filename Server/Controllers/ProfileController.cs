@@ -28,7 +28,7 @@ namespace Server.Controllers
         {
             var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
-           var id= await _profileService.Create(model.ProfilePicture, model.About, userId);
+           var id= await _profileService.Create(model.ProfilePicture, model.About, userId, model.FirsName, model.LastName);
 
             return Created(nameof(this.Create), id);
         }

@@ -12,6 +12,10 @@ namespace Server.Data.Entities
     {
 
         public int ProfileId { get; set; }
+        [Required]
+        public string FirsName { get; set; }
+        [Required]
+        public string LastName { get; set; }
 
         [Required]
         public string UserId { get; set; }

@@ -10,6 +10,10 @@ namespace Server.Models
     public class ProfileModel
     {
         [Required]
+        public string FirsName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
         [MaxLength(1500)]
         public string About { get; set; }
         [Required]

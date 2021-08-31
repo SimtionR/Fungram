@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
 
@@ -12,7 +12,7 @@ export class DetailPostComponent implements OnInit {
 
   id: any;
   post!: Post;
-  constructor(private route: ActivatedRoute, private postService:PostService) { 
+  constructor(private route: ActivatedRoute, private postService:PostService, private router: Router) { 
     this.route.params.subscribe( result => {
       this.id = result['id'];
       this.postService.getPost(this.id).subscribe( res => {
@@ -25,6 +25,10 @@ export class DetailPostComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("test")
+  }
+
+  postComment(id: any){
+    this.router.navigate(["comment", id]);
   }
 
 }

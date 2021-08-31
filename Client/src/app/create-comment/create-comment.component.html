@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-g-4">
+      <form [formGroup]="commentForm" (ngSubmit)="create()">
+        <div class="form-group">
+          <label for="description" >Comment:</label>
+          <textarea class="form-control" id="description" rows="3" formControlName="CommentBody"></textarea>
+            <!-- <div  *ngIf="CommentBody?.touched && CommentBody?.errors?.required" class="alert alert-danger">
+                    This filed is required!
+                  </div> -->
+                </div>
+                <button type="submit"  class="btn btn-primary">Send comment</button>
+      
+      </form>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@
 using Server.Data;
 using Server.Data.Entities;
 using Server.Data.IServices;
+using Server.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,12 +58,20 @@ namespace InTouch.Data.Services
                          .FirstOrDefault();
         }
 
-        public Profile GetProfileByUser(string userId)
+        public async Task<ProfileModel> GetProfileByUser(string userId)
         {
-            return _ctx.Profiles.
+            return await _ctx.Profiles.
                 Include(p => p.User)
                 .Where(p => p.User.Id == userId)
-                .FirstOrDefault();
+                .Select( p=> new ProfileModel
+                {
+                    ProfileId=p.ProfileId,
+                    ProfilePicture=p.ProfilePicture,
+                    About=p.About,
+                    FirsName=p.FirsName,
+                    LastName=p.LastName
+                })
+                .FirstOrDefaultAsync();
         }
 
       

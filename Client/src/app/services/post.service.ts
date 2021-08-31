@@ -10,6 +10,7 @@ import {Post} from '../models/post';
 export class PostService {
   private postPath= environment.apiUrl+ 'post'
 
+
   constructor(private http: HttpClient) { }
 
 
@@ -35,4 +36,5 @@ export class PostService {
   {
     return this.http.put<Post>(this.postPath, data);
   }
+  
 }

@@ -15,6 +15,7 @@ namespace Server.Models
         [MaxLength(1000)]
         public string PostDescription { get; set; }
         public string? ImageUrl { get; set; }
+        public int NumberOfReactions { get; set; }
 
     }
 }

@@ -19,4 +19,9 @@ export class ProfileService {
  
     return this.http.post<Profile>(this.profilePath, data)
   }
+
+  get(): Observable<Profile>
+  {
+    return this.http.get<Profile>(this.profilePath);
+  }
 }

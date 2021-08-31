@@ -12,6 +12,9 @@
                   <br>
                   <button class="btn btn-danger" (click)="deletePost(post.postId)">Delete</button>
                   <button (click)="updatePost(post.postId)" class="btn btn-warning">Update</button>
+                  <br>
+                  <div class="col-md-4">{{post.numberOfReactions}} </div>
+                  <app-reactions [numberOfReactions]="post.numberOfReactions" [postId]="post.postId"></app-reactions>
                   
                 </div>
               </div>

@@ -18,8 +18,8 @@ namespace Server.Data.Entities
         public virtual Profile Profile { get; set; }
 
         public int NumberOfReactions { get; set; }
-        public  virtual ICollection<Reaction> Reactions { get; set; }
-        public  virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Reaction> Reactions { get; set; } = new List<Reaction>();
+        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
 
     }

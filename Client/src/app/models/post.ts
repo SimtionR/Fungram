@@ -6,5 +6,6 @@ export interface Post
     imageUrl:string;
     postDescription?:string;
     profile?:Profile;
+    numberOfReactions: number;
 
 }

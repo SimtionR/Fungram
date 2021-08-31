@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using static Server.Extensions.DRY_Functions;
 
 namespace Server.Controllers
 {
@@ -27,10 +28,9 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePost(PostModel model)
         {
-            var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
 
-            var profile =_profileService.GetProfileByUser(userId);
+            var profile =await GetPorifleUser(this.User.Claims, _profileService);
 
 
             if(profile!= null)
@@ -49,10 +49,9 @@ namespace Server.Controllers
         [HttpGet]
         public async Task<IEnumerable<FeedListModel>> Feed()
         {
-            var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+    
 
-
-            var profile = _profileService.GetProfileByUser(userId);
+            var profile = await GetPorifleUser(this.User.Claims, _profileService);
 
             if (profile != null)
             {
@@ -90,10 +89,8 @@ namespace Server.Controllers
         [HttpPut]
         public async Task<ActionResult> Update(UpdatePost model)
         {
-            var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
-
-            var profile = _profileService.GetProfileByUser(userId);
+            var profile = await GetPorifleUser(this.User.Claims, _profileService);
 
             if (profile != null)
             {
@@ -114,9 +111,8 @@ namespace Server.Controllers
         [Route("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-
-            var profile = _profileService.GetProfileByUser(userId);
+         
+            var profile = await GetPorifleUser(this.User.Claims, _profileService);
 
             if (profile != null)
             {

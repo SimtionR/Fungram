@@ -18,6 +18,11 @@ import { PostComponent } from './post/post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { DetailPostComponent } from './detail-post/detail-post.component';
 import { UpdatePostComponent } from './update-post/update-post.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
+import { CreateCommentComponent } from './create-comment/create-comment.component';
+import { CommentDetailComponent } from './comment-detail/comment-detail.component';
+import { ReactionsComponent } from './reactions/reactions.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { UpdatePostComponent } from './update-post/update-post.component';
     PostComponent,
     PostListComponent,
     DetailPostComponent,
-    UpdatePostComponent
+    UpdatePostComponent,
+    ProfileComponent,
+    CommentListComponent,
+    CreateCommentComponent,
+    CommentDetailComponent,
+    ReactionsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,15 @@
-﻿using InTouch.Data.Services;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Server.Data.Entities;
 using Server.Data.IServices;
 using Server.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
+using static Server.Extensions.DRY_Functions;
 
 namespace Server.Controllers
 {
+    [Authorize]
     public class ProfileController : ApiController
     {
         private readonly IProfileService _profileService;
@@ -23,7 +20,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+
         public async Task<ActionResult> Create(ProfileModel model)
         {
             var userId = this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -31,6 +28,19 @@ namespace Server.Controllers
            var id= await _profileService.Create(model.ProfilePicture, model.About, userId, model.FirsName, model.LastName);
 
             return Created(nameof(this.Create), id);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ProfileModel>> Get()
+        {
+            var profile = await GetPorifleUser(this.User.Claims, _profileService);
+
+            if (profile == null)
+            {
+                return BadRequest();
+            }
+
+            return profile;
         }
     }
 }

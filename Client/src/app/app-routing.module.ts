@@ -8,6 +8,8 @@ import { PostComponent } from './post/post.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UpdatePostComponent } from './update-post/update-post.component';
+import {ProfileComponent} from './profile/profile.component';
+import { CreateCommentComponent } from './create-comment/create-comment.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -16,7 +18,9 @@ const routes: Routes = [
   {path: 'post', component: PostComponent, canActivate: [AuthGuardService]},
   {path: 'posts', component: PostListComponent, canActivate: [AuthGuardService]},
   {path: 'posts/:id', component: DetailPostComponent, canActivate:[AuthGuardService]},
-  {path: 'posts/:id/update',component: UpdatePostComponent}
+  {path: 'posts/:id/update',component: UpdatePostComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'comment/:id', component: CreateCommentComponent}
   
 ];
 

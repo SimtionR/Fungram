@@ -1,7 +1,9 @@
-﻿using Server.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data.Entities;
 using Server.Data.IServices;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Server.Data.Services
 {
@@ -14,18 +16,32 @@ namespace Server.Data.Services
             _ctx = ctx;
         }
 
-        public void AddComment(Comment comment)
+        public async Task<int> CreateComment(int profileId, int postId, string commentBody)
         {
-            _ctx.Add(comment);
-            _ctx.SaveChanges();
+            var post=await this._ctx.Posts
+                .Where(p => p.PostId == postId)
+                .FirstOrDefaultAsync();
+
+            var commnet = new Comment
+            {
+                Post = post,
+                ProfileId = profileId,
+                CommentBody = commentBody
+            };
+
+            post.Comments.Add(commnet);
+
+            await this._ctx.SaveChangesAsync();
+
+            return commnet.CommentId;
         }
 
-        public IEnumerable<Comment> GetAllComents()
+      /*  public IEnumerable<Comment> GetAllComents()
         {
             return _ctx.Comments
                         .OrderBy(c => c.PostId)
                         .ToList();
-        }
+        }*/
 
         public Comment GetCommentById(int commentId)
         {
@@ -41,16 +57,34 @@ namespace Server.Data.Services
                         .ToList();
         }
 
-        public IEnumerable<Comment> GetCommentsByPost(int postId)
+        public async Task<IEnumerable<Comment>> GetCommentsByPost(int postId)
         {
-            return _ctx.Comments
+            return await _ctx.Comments
+                       .Include(c => c.Profile)
                        .Where(c => c.PostId == postId)
-                       .ToList();
+                       .ToListAsync();
         }
 
         public bool SaveChanges()
         {
             return _ctx.SaveChanges() > 0;
+        }
+
+        public async Task<bool> Delete(int commentId, int profileId)
+        {
+            var comment = await _ctx.Comments
+                            .Where(c => c.CommentId == commentId && c.ProfileId == profileId)
+                            .FirstOrDefaultAsync();
+
+            if (comment != null)
+            {
+                _ctx.Comments.Remove(comment);
+                _ctx.SaveChangesAsync();
+                return true;
+            }
+
+            else
+                return false;
         }
     }
 }

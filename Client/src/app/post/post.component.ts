@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PostService } from '../services/post.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { PostService } from '../services/post.service';
 export class PostComponent  {
   postForm: FormGroup
 
-  constructor(private fb: FormBuilder, private postService: PostService) {
+  constructor(private fb: FormBuilder, private postService: PostService,
+    private router: Router) {
     this.postForm = this.fb.group({
       'ImageUrl': [''],
       'Description':['', Validators.required]
@@ -21,7 +23,7 @@ export class PostComponent  {
    create()
    {
      this.postService.create(this.postForm.value).subscribe(
-       res=> { console.log(res);}
+       res=> { this.redirect();}
      )
      
 
@@ -36,6 +38,12 @@ export class PostComponent  {
    {
      return this.postForm.get('Description');
    }
+
+   redirect()
+  {
+    this.router.navigate(["posts"])
+  }
+    
 
    
 

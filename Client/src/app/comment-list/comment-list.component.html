@@ -1,0 +1,20 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5 " *ngFor="let comment of comments">
+            <img [src]="comment?.profile?.profilePicture" class="card-img-top" alt="...">
+            {{comment?.profile?.firsName}} {{comment?.profile?.lastName}}
+        <div class=" col-md-8" >
+            <div class="card-text ">
+                {{comment.commentBody}}
+                
+            </div>
+        </div>
+        <div class="col-md-8">
+            <button class="btn btn-danger"(click)="deleteComment(comment.commentId)">Delete</button>
+            <button class="btn btn-success">Respond</button>
+        </div>
+            
+      
+    </div>
+</div>

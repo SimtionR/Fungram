@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="col-md-6 offset-md-4">
+        <div class="card" style="width: 18rem;">
+            <img [src]="profile?.profilePicture" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{profile?.firsName}} {{profile?.lastName}} </h5>
+              <p class="card-text">About : {{profile?.about}}</p>
+              <!-- <a (click)="viewPosts()" class="btn btn-primary">View posts</a> -->
+              
+            </div>
+          </div>
+    </div>
+    
+    
+</div>
+
+<div class="cotaniner-fluid">
+    <app-post-list></app-post-list>
+</div>

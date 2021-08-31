@@ -48,16 +48,17 @@ namespace InTouch.Data.Services
                     PostId = p.PostId,
                     ImageUrl = p.ImageUrl,
                     PostDescription = p.PostDescription,
+                    NumberOfReactions=p.NumberOfReactions
 
                 })
                 .ToListAsync();
         }
 
-        public Post GetPostById(int postId)
+        public async Task<Post> GetPostById(int postId)
         {
-            return _ctx.Posts
+            return await _ctx.Posts
                         .Where(p => p.PostId == postId)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
         }
 
         public IEnumerable<Post> GetPostsByProfile(int profileId)

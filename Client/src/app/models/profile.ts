@@ -1,7 +1,7 @@
 export interface Profile{
-    id: number;
-    ProfiePicture: string;
-    About: string;
+    profileId: number;
+    profilePicture: string;
+    about: string;
     firsName:string;
     lastName:string;
 }

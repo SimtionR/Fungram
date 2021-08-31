@@ -13,7 +13,7 @@ namespace Server.Models
         public int ProfileId { get; set; }
         public virtual Profile Profile { get; set; }
 
-        public int NumberOfReactions { get; set; }
+        //public int NumberOfReactions { get; set; }
         public virtual ICollection<Reaction> Reactions { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
     }

@@ -9,14 +9,15 @@ namespace Server.Models
 {
     public class ProfileModel
     {
-        [Required]
+        public int ProfileId { get; set; }
+        //[Required]
         public string FirsName { get; set; }
-        [Required]
+        //[Required]
         public string LastName { get; set; }
-        [Required]
+        //[Required]
         [MaxLength(1500)]
         public string About { get; set; }
-        [Required]
+        //[Required]
         public string ProfilePicture { get; set; }
     }
 }

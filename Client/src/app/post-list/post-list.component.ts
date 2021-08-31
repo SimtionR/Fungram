@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { disableDebugTools, ɵDomSharedStylesHost } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
@@ -10,6 +11,8 @@ import { PostService } from '../services/post.service';
 })
 export class PostListComponent implements OnInit {
   posts:Array<Post> =[]
+
+
 
   constructor(private postService: PostService, private router: Router) { }
 
@@ -30,8 +33,10 @@ export class PostListComponent implements OnInit {
   }
 
   deletePost(postId: number){
-    this.postService.deletePost(postId).subscribe();
-    this.getPosts();
+    this.postService.deletePost(postId).subscribe( del =>{
+      this.getPosts();
+    });
+   
   }
 
   updatePost(postId: number){

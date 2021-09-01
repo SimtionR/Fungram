@@ -24,7 +24,7 @@ export class DetailPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("test")
+    
   }
 
   postComment(id: any){

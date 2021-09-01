@@ -23,6 +23,9 @@ import { CommentListComponent } from './comment-list/comment-list.component';
 import { CreateCommentComponent } from './create-comment/create-comment.component';
 import { CommentDetailComponent } from './comment-detail/comment-detail.component';
 import { ReactionsComponent } from './reactions/reactions.component';
+import { ErrorInterceptorService } from './services/error-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,8 @@ import { ReactionsComponent } from './reactions/reactions.component';
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthService, 
@@ -56,6 +61,11 @@ import { ReactionsComponent } from './reactions/reactions.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi:true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

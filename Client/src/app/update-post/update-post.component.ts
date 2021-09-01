@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-update-post',
@@ -13,8 +15,11 @@ export class UpdatePostComponent implements OnInit {
   postForm!: FormGroup;
   postId!: number;
   post!: Post;
-  constructor(private fb: FormBuilder, private route:ActivatedRoute, private postService: PostService
-    ,private router: Router) {
+  constructor(private fb: FormBuilder, 
+              private route:ActivatedRoute,
+              private postService: PostService,
+              private router: Router,
+              private toastrService: ToastrService) {
     this.postForm= this.fb.group({
       'postId':[''],
       'description':['']
@@ -41,6 +46,7 @@ export class UpdatePostComponent implements OnInit {
   updatePost()
   {
     this.postService.updatePost(this.postForm.value).subscribe( res => {
+      this.toastrService.success("Post updated!")
       this.router.navigate(["posts"])
     });
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from '../services/comment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-comment',
@@ -12,8 +13,11 @@ export class CreateCommentComponent implements OnInit {
   commentForm: FormGroup;
   id: any;
 
-  constructor(private fb:FormBuilder, private commentService: CommentService,
-    private route: ActivatedRoute, private router: Router) {
+  constructor(private fb:FormBuilder, 
+              private commentService: CommentService,
+              private route: ActivatedRoute, 
+              private router: Router,
+              private toastrService: ToastrService) {
     this.commentForm= this.fb.group({
       'CommentBody': ['',Validators.required]
 
@@ -32,6 +36,7 @@ export class CreateCommentComponent implements OnInit {
     this.commentService.postComment(this.id,this.commentForm.value).subscribe(res =>
       {
         this.redirect()
+        this.toastrService.success("Comment posted!")
       })
   }
 

@@ -3,6 +3,7 @@ import { disableDebugTools, ɵDomSharedStylesHost } from '@angular/platform-brow
 import { Router } from '@angular/router';
 import { Post } from '../models/post';
 import { PostService } from '../services/post.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-list',
@@ -14,7 +15,9 @@ export class PostListComponent implements OnInit {
 
 
 
-  constructor(private postService: PostService, private router: Router) { }
+  constructor(private postService: PostService,
+              private router: Router,
+              private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getPosts();
@@ -34,14 +37,16 @@ export class PostListComponent implements OnInit {
 
   deletePost(postId: number){
     this.postService.deletePost(postId).subscribe( del =>{
+      this.toastrService.success("Post deleted!");
       this.getPosts();
     });
    
   }
 
   updatePost(postId: number){
-    console.log("works");
+    
     this.router.navigate(["posts", postId, "update"])
+    
   }
 
 }
